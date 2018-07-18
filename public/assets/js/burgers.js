@@ -10,29 +10,27 @@ $(function() {
     $.ajax("/api/burgers/" + id, {
       type: "PUT",
       data: newDevouredState
-    }).then(
-      function() {
-        location.reload();
-      }
-    );
+    }).then(function() {
+      location.reload();
+    });
   });
 
   $(".create-form").on("submit", function(event) {
     event.preventDefault();
 
     var newBurger = {
-      name: $("#burger").val().trim(),
+      name: $("#burger")
+        .val()
+        .trim(),
       devoured: false
     };
 
     $.ajax("/api/burgers", {
       type: "POST",
       data: newBurger
-    }).then(
-      function() {
-        console.log("created new burger");
-        location.reload();
-      }
-    );
+    }).then(function() {
+      console.log("created new burger");
+      location.reload();
+    });
   });
 });

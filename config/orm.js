@@ -24,17 +24,12 @@ function objToSql(ob) {
     var value = ob[key];
     // check to skip hidden properties
     if (Object.hasOwnProperty.call(ob, key)) {
-      // if string with spaces, add quotations (beef => 'beef')
       if (typeof value === "string" && value.indexOf(" ") >= 0) {
         value = "'" + value + "'";
       }
-      // e.g. {name: 'beef'} => ["name='beef'"]
-      // e.g. {devoured: true} => ["devoured=true"]
       arr.push(key + "=" + value);
     }
   }
-
-  // translate array of strings to a single comma-separated string
   return arr.toString();
 }
 
@@ -69,7 +64,6 @@ var orm = {
       cb(result);
     });
   },
-  // An example of objColVals would be {name: beef, devoured: true}
   updateOne: function(table, objColVals, condition, cb) {
     var queryString = "UPDATE " + table;
 
@@ -83,7 +77,6 @@ var orm = {
       if (err) {
         throw err;
       }
-
       cb(result);
     });
   }
